@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from .models import *
 
 def store(request):
-    context = {}
+    products = Product.objects.all()
+    context = {'products': products}
     return render(request, 'bottega_retrogaming/store.html', context)
 
 def cart(request):
