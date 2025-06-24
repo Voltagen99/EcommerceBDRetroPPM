@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .models import *
-from .utils import cookieCart, cartData
+from .utils import guestOrder, cartData
 import json
 import datetime
 
@@ -61,22 +61,25 @@ def processOrder(request):
     if request.user.is_authenticated:
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
-        total = float(data['form']['total'])
-        order.transaction_id = transaction_id
-        if total == order.get_cart_total:
-            order.complete = True
-        order.save()
-        if order.shipping:
-            ShippingAddress.objects.create(
-                customer=customer,
-                order=order,
-                address=data['shipping']['address'],
-                city=data['shipping']['city'],
-                state=data['shipping']['state'],
-                zipcode=data['shipping']['zipcode']
-            )
-        else:
-            print('No shipping address provided')
     else:
-        print('Not logged in')
+        customer, order = guestOrder(request, data)
+
+    total = float(data['form']['total'])
+    order.transaction_id = transaction_id
+    if total == order.get_cart_total:
+        order.complete = True
+    order.save()
+
+    if order.shipping:
+        ShippingAddress.objects.create(
+            customer=customer,
+            order=order,
+            address=data['shipping']['address'],
+            city=data['shipping']['city'],
+            state=data['shipping']['state'],
+            zipcode=data['shipping']['zipcode']
+        )
+    else:
+        print('No shipping address provided')
+
     return JsonResponse('Payment submitted', safe=False)
