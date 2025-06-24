@@ -1,17 +1,21 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.views.generic import ListView
 from .models import *
 from .utils import guestOrder, cartData
 import json
 import datetime
 
-def store(request):
-    data = cartData(request)
-    cartItems = data['cartItems']
-    products = Product.objects.all()
+class StoreView(ListView):
+    model = Product
+    template_name = 'bottega_retrogaming/store.html'
+    context_object_name = 'products'
 
-    context = {'products': products, 'cartItems': cartItems}
-    return render(request, 'bottega_retrogaming/store.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        data = cartData(self.request)
+        context['cartItems'] = data['cartItems']
+        return context
 
 
 def cart(request):
