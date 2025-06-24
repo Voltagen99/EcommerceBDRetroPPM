@@ -26,6 +26,7 @@
                 }
             }
         }
+
         let csrftoken = getToken('csrftoken');
 
         function getCookie(name) {
@@ -38,6 +39,7 @@
             }
             return null;
         }
+
         let cart = JSON.parse(getCookie('cart'))
         if (cart === null) {
             console.log('Cart created.') // per vedere questo messaggio, reset dei cookie del sito
@@ -50,27 +52,33 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid"><a class="navbar-brand" href="{% url 'store' %}">La Bottega del Retrogaming</a>
+    <div class="container-fluid"><a class="navbar-brand" href="{% url 'store' %}">
+        <img src="{% static 'images/bdretro_logo.png' %}" alt="Logo" class="logo-navbar">
+    </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{% url 'store' %}">Store</a>
-                </li>
-            </ul>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+            <!-- Empty space for navbar -->
+            {% url 'login' as login_url %}
+            <div class="form-inline my-2 my-lg-0 {% if request.path == login_url %}d-none{% endif %}">
+                {% if user.is_authenticated %}
+                    <span class="navbar-text mr-3">Ciao, {{ user.username }}</span>
+                    <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-logout">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-login">Login</a>
+                {% endif %}
 
-            <div class="d-flex align-items-center">
-                <a href="#" class="btn btn-warning me-3">Login</a>
-                <div style="position: relative;">
-                    <a href="{% url 'cart' %}">
-                        <img id="cart-icon" src="{% static 'images/cart.png' %}" alt="cart01">
-                    </a>
-                    <p id="cart-total">{{cartItems}}</p>
-                </div>
+                <a href="{% url 'cart' %}">
+                    <img id="cart-icon" src="{% static 'images/cart.png' %}" alt="cart-icon">
+                </a>
+                <p id="cart-total">{{ cartItems }}</p>
             </div>
 
         </div>

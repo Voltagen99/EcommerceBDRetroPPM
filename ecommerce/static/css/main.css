@@ -26,7 +26,14 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .bg-dark{
-	background-color: #4f868c!important;
+	background-color: #1ac6ff!important;
+}
+
+.logo-navbar {
+    height: 35px;
+    width: auto;
+    vertical-align: middle;
+    margin-right: 8px;
 }
 
 #cart-icon{
@@ -37,12 +44,10 @@ h1,h2,h3,h4,h5,h6{
     left: -8px;
 }
 
-/* main.css */
-
 #cart-total {
     position: absolute;
-    top: -10px;
-    right: -5px;
+	right: 7px;
+	top: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,6 +59,29 @@ h1,h2,h3,h4,h5,h6{
     font-size: 14px;
 }
 
+.btn-login, .btn-logout {
+	border-radius: 25px;
+	background-color: #01649b;
+	border-color: #01649b;
+	color: #ffffff;
+	font-size: 15px;
+	font-weight: bold;
+}
+
+.btn-login:hover, .btn-logout:hover {
+	background-color: #0090df;
+	border-color: #007bff;
+	color: #ffffff;
+	cursor: pointer;
+}
+
+.navbar-text{
+	color: white;
+	text-shadow: 0 0 5px #000;
+	font-weight: 700;
+}
+
+/* Responsive Design */
 .col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12{
 	margin-top: 10px;
 }
