@@ -7,6 +7,17 @@ h1, h2, h3, h4, h5, h6 {
     color: hsl(0, 0%, 30%);
 }
 
+.filter-container {
+    margin-top: 25px;
+    background-color: #bfe8ff;
+    border: 4px solid #00b1ff;
+}
+
+.filter-container .form-control:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 .box-element {
     border: solid black;
     background-color: #fff;
