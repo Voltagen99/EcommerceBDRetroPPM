@@ -1,5 +1,6 @@
 import json
 from .models import *
+from django.db import IntegrityError
 from user_management.models import CustomUser
 
 def cookieCart(request):
@@ -55,39 +56,39 @@ def cartData(request):
 
 
 def guestOrder(request, data):
-    print('User is not logged in...')
-    # Estrai 'name' e 'email' dal form
+    print('Utente non loggato, avvio registrazione in-place...')
+
     name = data['form']['name']
     email = data['form']['email']
+    password = data['form']['password']
+    password_confirm = data['form']['password-confirm']
 
-    # 1. Controlla se un utente con questo USERNAME (preso dal campo 'name') esiste già
-    if CustomUser.objects.filter(username=name).exists():
-        print(f"Username '{name}' already exists. Purchase blocked for guest.")
-        # 2. Ritorna None per segnalare l'errore alla vista
-        return None, None
+    if password != password_confirm:
+        return None, {'error': 'Le password non coincidono.'}
 
-    # 3. Se l'username è disponibile, crea il nuovo utente
-    print(f"Username '{name}' is available, creating new guest account...")
-    cookieData = cookieCart(request)
+    try:
+        customer = CustomUser.objects.create_user(
+            username=name,
+            email=email,
+            password=password
+        )
+    except IntegrityError:
+        return None, {'error': 'Username o email già esistenti.'}
+    except Exception as e:
+        return None, {'error': f'Si è verificato un errore imprevisto: {e}'}
+
+    cookieData = cartData(request)
     items = cookieData['items']
-
-    customer = CustomUser.objects.create(
-        username=name,  # Imposta l'username
-        email=email,  # Imposta l'email
-        name=name  # Imposta anche il campo 'name' per visualizzazione
-    )
-
     order = Order.objects.create(
         customer=customer,
         complete=False,
-    )
+        )
 
     for item in items:
         product = Product.objects.get(id=item['product']['id'])
         orderItem = OrderItem.objects.create(
             product=product,
             order=order,
-            quantity=item['quantity']
+            quantity=item['quantity'],
         )
-
     return customer, order

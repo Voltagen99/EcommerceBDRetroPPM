@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.generic import ListView
+from django.contrib.auth import login
 from .models import *
 from .utils import guestOrder, cartData
 import json
@@ -58,6 +59,7 @@ def updateItem(request):
         orderItem.delete()
     return JsonResponse('Item was added', safe=False)
 
+
 def processOrder(request):
     transaction_id = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
@@ -66,9 +68,11 @@ def processOrder(request):
         customer = request.user
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
     else:
-        customer, order = guestOrder(request, data)
+        customer, order_or_error = guestOrder(request, data)
         if customer is None:
-            return JsonResponse({'error': 'Username già esistente. Inserisci un altro username.'}, status=400)
+            return JsonResponse(order_or_error, status=400)
+        login(request, customer)
+        order = order_or_error
 
     total = float(data['form']['total'])
     order.transaction_id = transaction_id

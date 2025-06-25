@@ -6,7 +6,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('', include('bottega_retrogaming.urls'))
+    path('', include('bottega_retrogaming.urls')),
+    path('user/', include('user_management.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

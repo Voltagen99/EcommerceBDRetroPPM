@@ -17,6 +17,18 @@
                                 <input required class="form-control" type="email" name="email" placeholder="Email..">
                             </label>
                         </div>
+                        <div class="form-field">
+                            <label>
+                                <input required class="form-control" type="password" name="password"
+                                       placeholder="Password..">
+                            </label>
+                        </div>
+                        <div class="form-field">
+                            <label>
+                                <input required class="form-control" type="password" name="password-confirm"
+                                       placeholder="Conferma Password..">
+                            </label>
+                        </div>
                     </div>
 
                     <div id="shipping-info">
@@ -94,63 +106,57 @@
         }
 
         function submitFormData() {
-            console.log('Payment clicked');
+            console.log('Payment button clicked')
+
             const userFormData = {
                 'name': null,
                 'email': null,
+                'password': null,
+                'password-confirm': null,
                 'total': total,
-            }
+            };
+
             const shippingInfo = {
                 'address': null,
                 'city': null,
                 'state': null,
                 'zipcode': null,
+            };
+
+            if (user === 'AnonymousUser') {
+                userFormData.name = form.name.value
+                userFormData.email = form.email.value
+                userFormData.password = form.password.value
+                userFormData['password-confirm'] = form['password-confirm'].value
             }
 
-            if (shipping !== 'False') {
+
+            if (shipping === 'True') {
                 shippingInfo.address = form.address.value
                 shippingInfo.city = form.city.value
                 shippingInfo.state = form.state.value
                 shippingInfo.zipcode = form.zipcode.value
             }
 
-            if (user === 'AnonymousUser') {
-                userFormData.name = form.name.value
-                userFormData.email = form.email.value
-            }
-
-            const url = '/process_order/';
+            const url = "/process_order/";
             fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': csrftoken,
                 },
-                body: JSON.stringify({
-                    'form': userFormData,
-                    'shipping': shippingInfo,
-                }),
+                body: JSON.stringify({'form': userFormData, 'shipping': shippingInfo})
             })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        return response.json().then(errorData => {
-                            throw new Error(errorData.error);
-                        });
-                    }
-                })
+                .then((response) => response.json())
                 .then((data) => {
                     console.log('Success:', data);
-                    alert('Transaction completed successfully');
-                    cart = {};
-                    document.cookie = 'cart=' + JSON.stringify(cart) + ';domain=;path=/';
-                    window.location.href = '{% url 'store' %}';
+                    alert('Transazione completata');
+
+                    cart = {}
+                    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/"
+
+                    window.location.href = "{% url 'store' %}"
                 })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert(error.message);
-                });
         }
 
         const form = document.getElementById('form');
