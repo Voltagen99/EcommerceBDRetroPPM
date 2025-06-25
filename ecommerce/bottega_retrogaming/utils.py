@@ -1,5 +1,6 @@
 import json
 from .models import *
+from user_management.models import CustomUser
 
 def cookieCart(request):
     try:
@@ -55,25 +56,26 @@ def cartData(request):
 
 def guestOrder(request, data):
     print('User is not logged in...')
-    print('COOKIES:', request.COOKIES)
+    # Estrai 'name' e 'email' dal form
     name = data['form']['name']
     email = data['form']['email']
 
+    # 1. Controlla se un utente con questo USERNAME (preso dal campo 'name') esiste già
+    if CustomUser.objects.filter(username=name).exists():
+        print(f"Username '{name}' already exists. Purchase blocked for guest.")
+        # 2. Ritorna None per segnalare l'errore alla vista
+        return None, None
+
+    # 3. Se l'username è disponibile, crea il nuovo utente
+    print(f"Username '{name}' is available, creating new guest account...")
     cookieData = cookieCart(request)
     items = cookieData['items']
 
-    customer, created = CustomUser.objects.get_or_create(
-        email=email,
-        defaults={
-            'username': email,  # Per evitare UNIQUE constraint in Django
-            'name': name,
-        }
+    customer = CustomUser.objects.create(
+        username=name,  # Imposta l'username
+        email=email,  # Imposta l'email
+        name=name  # Imposta anche il campo 'name' per visualizzazione
     )
-
-    # Se l'utente esiste già, non aggiorniamo il nome
-    if not created:
-        customer.name = name
-        customer.save()
 
     order = Order.objects.create(
         customer=customer,
@@ -82,10 +84,10 @@ def guestOrder(request, data):
 
     for item in items:
         product = Product.objects.get(id=item['product']['id'])
-        OrderItem.objects.create(
+        orderItem = OrderItem.objects.create(
             product=product,
             order=order,
-            quantity=item['quantity'],
+            quantity=item['quantity']
         )
 
     return customer, order

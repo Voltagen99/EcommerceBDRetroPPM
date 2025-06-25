@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 
-class BottegaRetrogamingConfig(AppConfig):
+
+class UserManagementConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'bottega_retrogaming'
+    name = 'user_management'

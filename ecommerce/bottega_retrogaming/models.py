@@ -1,36 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-
-
-class CustomUser(AbstractUser):
-    ADMIN = 'ADMIN'
-    CUSTOMER = 'CUSTOMER'
-    USER_TYPE_CHOICES = (
-        (ADMIN, 'Admin'),
-        (CUSTOMER, 'Customer'),
-    )
-    user_type = models.CharField(
-        max_length=10,
-        choices=USER_TYPE_CHOICES,
-        default=CUSTOMER
-    )
-    name = models.CharField("Nome visualizzato", max_length=200, blank=True, null=True)
-
-    def save(self, *args, **kwargs):
-        if self.is_superuser:
-            self.is_staff = True
-            self.user_type = self.ADMIN
-        else:
-            if self.user_type == self.ADMIN:
-                self.is_staff = True
-            else:
-                self.is_staff = False
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        if self.name:
-            return self.name
-        return self.username
+from django.conf import settings
 
 class Product(models.Model):
     name = models.CharField(max_length=200)
@@ -51,7 +20,7 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    customer = models.ForeignKey('CustomUser', on_delete=models.SET_NULL, null=True, blank=True)
+    customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True)
     date_ordered = models.DateTimeField(auto_now_add=True)
     complete = models.BooleanField(default=False)
     transaction_id = models.CharField(max_length=100, null=True)
@@ -93,7 +62,7 @@ class OrderItem(models.Model):
 
 
 class ShippingAddress(models.Model):
-    customer = models.ForeignKey('CustomUser', on_delete=models.SET_NULL, null=True)
+    customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
     address = models.CharField(max_length=200, null=False)
     city = models.CharField(max_length=200, null=False)

@@ -67,6 +67,8 @@ def processOrder(request):
         order, created = Order.objects.get_or_create(customer=customer, complete=False)
     else:
         customer, order = guestOrder(request, data)
+        if customer is None:
+            return JsonResponse({'error': 'Username già esistente. Inserisci un altro username.'}, status=400)
 
     total = float(data['form']['total'])
     order.transaction_id = transaction_id

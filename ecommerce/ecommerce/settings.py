@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bottega_retrogaming.apps.BottegaRetrogamingConfig',
+    'user_management',
 ]
 
 MIDDLEWARE = [
@@ -81,7 +82,7 @@ DATABASES = {
     }
 }
 
-AUTH_USER_MODEL = 'bottega_retrogaming.CustomUser'
+AUTH_USER_MODEL = 'user_management.CustomUser'
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
