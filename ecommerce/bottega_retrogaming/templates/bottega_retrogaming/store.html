@@ -3,12 +3,12 @@
 {% block content %}
     <div class="row">
         {% for product in products %}
-            <div class="col-lg-4">
+            <div class="col-lg-4 mb-5">
                 <img class="thumbnail" src="{{ product.imageUrl }}" alt="image_cell">
                 <div class="box-element product">
                     <div class="product-header">
                         <h6><strong>{{ product.name }}</strong></h6>
-                        <h4 class="mb-0"><strong>${{ product.price|floatformat:2 }}</strong></h4>
+                        <h4 class="mb-0"><strong>€{{ product.price|floatformat:2 }}</strong></h4>
                     </div>
                     <hr>
                     <button
