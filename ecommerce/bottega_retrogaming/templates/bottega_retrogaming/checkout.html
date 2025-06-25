@@ -16,6 +16,18 @@
                                 <input required class="form-control" type="email" name="email" placeholder="Email..">
                             </label>
                         </div>
+                        {% if not user.is_authenticated %}
+                        <div class="form-field">
+                            <label>
+                                <input required class="form-control" type="password" name="password" placeholder="Password..">
+                            </label>
+                        </div>
+                        <div class="form-field">
+                            <label>
+                                <input required class="form-control" type="password" name="password-confirm" placeholder="Confirm Password..">
+                            </label>
+                        </div>
+                        {% endif %}
                     </div>
 
                     <div id="shipping-info">
@@ -84,6 +96,8 @@
     <script type="text/javascript">
         const shipping = '{{order.shipping}}'
         const total = '{{order.get_cart_total}}'
+        const form = document.getElementById('form');
+
         if (shipping === 'False') {
             document.getElementById('shipping-info').innerHTML = ''
         }
@@ -97,6 +111,18 @@
             document.getElementById('form-wrapper').classList.add('hidden');
             document.getElementById('payment-info').classList.remove('hidden');
         }
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            console.log('Form submitted');
+            document.getElementById('form-button').classList.add('hidden');
+            document.getElementById('payment-info').classList.remove('hidden');
+        })
+
+        document.getElementById('make-payment').addEventListener('click', function () {
+            submitFormData();
+        });
+
 
         function submitFormData() {
             console.log('Payment button clicked')
@@ -151,18 +177,5 @@
                     window.location.href = "{% url 'store' %}"
                 })
         }
-
-        const form = document.getElementById('form');
-        csrftoken = form.getElementsByTagName("input")[0].value;
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
-            console.log('Form submitted');
-            document.getElementById('form-button').classList.add('hidden');
-            document.getElementById('payment-info').classList.remove('hidden');
-        })
-
-        document.getElementById('make-payment').addEventListener('click', function () {
-            submitFormData();
-        });
     </script>
 {% endblock content %}
