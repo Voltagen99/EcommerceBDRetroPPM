@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.generic import ListView
 from django.contrib.auth import login
+from django.db.models.functions import Lower
 from .models import *
 from .utils import guestOrder, cartData
 import json
@@ -11,6 +12,33 @@ class StoreView(ListView):
     model = Product
     template_name = 'bottega_retrogaming/store.html'
     context_object_name = 'products'
+
+    def get_queryset(self):
+        """
+        Questo metodo applica il filtraggio e l'ordinamento dei prodotti
+        """
+        queryset = super().get_queryset().order_by()
+
+        sort_option = self.request.GET.get('sort', 'default')
+        digital_filter = self.request.GET.get('digital', '')
+
+        if digital_filter == 'yes':
+            queryset = queryset.filter(digital=True)
+        elif digital_filter == 'no':
+            queryset = queryset.filter(digital=False)
+
+        if sort_option == 'price_asc':
+            queryset = queryset.order_by('price')
+        elif sort_option == 'price_desc':
+            queryset = queryset.order_by('-price')
+        elif sort_option == 'name_asc':
+            queryset = queryset.order_by(Lower('name'))
+        elif sort_option == 'name_desc':
+            queryset = queryset.order_by(Lower('name').desc())
+        else: # Ordinamento di default per ID
+            queryset = queryset.order_by('id')
+
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
