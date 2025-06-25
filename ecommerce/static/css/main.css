@@ -7,6 +7,10 @@ h1, h2, h3, h4, h5, h6 {
     color: hsl(0, 0%, 30%);
 }
 
+.hidden {
+    display: none !important;
+}
+
 .filter-container {
     margin-top: 25px;
     background-color: #bfe8ff;
@@ -14,8 +18,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .filter-container .form-control:focus {
-  outline: none;
-  box-shadow: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.btn-apply {
+    border-radius: 15px;
+    background-color: #0082bc;
+    border-color: #0082bc;
+}
+
+.btn-apply:hover {
+    background-color: #006688;
+    border-color: #006688;
 }
 
 .box-element {
@@ -43,7 +58,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .product-header h6 {
-  font-size: 1.1rem;
+    font-size: 1.1rem;
 }
 
 .product hr {
@@ -122,13 +137,23 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 
-/* Responsive Design */
-.col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12 {
-    margin-top: 10px;
+.btn.btn-checkout {
+    float: right;
+    margin: 5px;
+    background: linear-gradient(45deg, #692fbf, #5e2aac);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
 }
 
-.btn {
-    border-radius: 0;
+.btn.btn-checkout:hover {
+    background: linear-gradient(45deg, #4f2188, #4c1e7e);
+    cursor: pointer;
+}
+
+.col-lg-4, .col-lg-6, .col-lg-8, .col-lg-12 {
+    margin-top: 10px;
 }
 
 .row-image {
@@ -147,15 +172,31 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 10px;
     margin-bottom: 10px;
     border-bottom: 1px solid #ececec;
+}
 
+.cart-dark-text h5,
+.cart-dark-text strong {
+    color: #000000;
+}
+
+.cart-dark-text .table th,
+.cart-dark-text .table td {
+    border-color: #000000;
+}
+
+.cart-dark-text .cart-row {
+    border-bottom: 1px solid black;
+    padding: 10px 0;
+}
+
+.cart-dark-text .cart-row:last-child {
+    border-bottom: none;
 }
 
 .quantity {
     display: inline-block;
     font-weight: 700;
     padding-right: 10px;
-
-
 }
 
 .chg-quantity {
@@ -170,7 +211,27 @@ h1, h2, h3, h4, h5, h6 {
     opacity: .6;
 }
 
+.checkout-black-style hr {
+    border-top: 1px solid #000000;
+}
 
-.hidden {
-    display: none !important;
+.checkout-black-style h3,
+.checkout-black-style h5 {
+    color: #000000;
+}
+
+.btn.btn-proceed {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn.btn-proceed:hover {
+    background-color: #0056b3;
+    cursor: pointer;
 }
