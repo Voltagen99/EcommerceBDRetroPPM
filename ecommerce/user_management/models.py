@@ -14,6 +14,7 @@ class CustomUser(AbstractUser):
         default=CUSTOMER
     )
     name = models.CharField("Nome visualizzato", max_length=200, blank=True, null=True)
+    email = models.CharField(max_length=254, blank=True, verbose_name='email address')
 
     def save(self, *args, **kwargs):
         if self.is_superuser:
