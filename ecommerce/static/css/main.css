@@ -286,3 +286,64 @@ h1, h2, h3, h4, h5, h6 {
 .large-bottom-margin {
   margin-bottom: 30vh;
 }
+
+.product-details-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    border: solid black;
+}
+
+.product-title {
+    font-size: 2rem;
+    font-weight: 500;
+    color: black;
+    margin-bottom: 1rem;
+}
+
+.product-type.lead {
+    color: black;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.product-price {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.description-heading {
+    margin-top: 1.5rem;
+    font-weight: 400;
+    color: #014303;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.product-description {
+    color: black;
+    font-size: 1.17rem;
+    line-height: 1.7;
+    text-align: justify;
+}
+
+.product-divider {
+    border: 0;
+    opacity: 80;
+    background-color: black;
+    height: 1px;
+    margin: 2rem 0;
+}
+
+.product-back {
+    background-color: #007bff;
+    color: white;
+    border-radius: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.product-back:hover {
+    background-color: #025cbd;
+    cursor: pointer;
+}

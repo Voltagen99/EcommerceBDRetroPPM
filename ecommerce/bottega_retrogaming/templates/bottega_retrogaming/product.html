@@ -2,37 +2,45 @@
 {% load static %}
 
 {% block content %}
-<div class="container my-5">
-    <div class="row">
-        <div class="col-md-6">
-            <img class="img-fluid rounded shadow-sm" src="{{ product.imageURL }}" alt="{{ product.name }}">
-        </div>
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6">
+                <img class="img-fluid" src="{{ product.imageUrl }}" alt="{{ product.name }}">
+            </div>
 
-        <div class="col-md-6">
-            <h2 class="display-5">{{ product.name }}</h2>
-            <hr>
-            
-            <p class="lead">
-                <strong>Tipo:</strong> 
-                {% if product.digital %}
-                    Download Digitale
-                {% else %}
-                    Prodotto Fisico
-                {% endif %}
-            </p>
+            <div class="col-md-6">
+                <div class="product-details-container">
+                    <h2 class="product-title display-5">{{ product.name }}</h2>
+                    <hr class="product-divider">
 
-            <h4 class="text-success my-3"><strong>Prezzo: ${{ product.price|floatformat:2 }}</strong></h4>
-            
-            <h5>Descrizione del prodotto</h5>
-            <p style="text-align: justify;">
-                {{ product.description|linebreaksbr }}
-            </p>
-            <hr>
-            <div class="text-end mt-4">
-                 <a href="{% url 'store' %}" class="btn btn-outline-secondary">Indietro</a>
+                    <p class="product-type lead">
+                        <strong>Tipo:</strong>
+                        {% if product.digital %}
+                            Download Digitale
+                        {% else %}
+                            Prodotto Fisico
+                        {% endif %}
+                    </p>
+
+                    <h4 class="product-price text-success my-3">{{ product.price|floatformat:2 }} €</h4>
+                    <hr class="product-divider">
+
+                    <h5 class="description-heading">Descrizione del prodotto</h5>
+                    <div class="product-description">
+                        {{ product.description|linebreaksbr }}
+                    </div>
+
+                    <hr class="product-divider">
+
+                    <div class="product-actions text-end mt-4">
+                        <button data-product="{{ product.id }}" data-action="add"
+                                class="btn btn-success add-btn update-cart">Aggiungi al Carrello
+                        </button>
+                        <a href="{% url 'store' %}" class="btn btn-outline-secondary product-back">Indietro</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 {% endblock content %}

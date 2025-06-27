@@ -123,6 +123,8 @@ def processOrder(request):
     return JsonResponse('Payment submitted', safe=False)
 
 def product_detail(request, pk):
+    data = cartData(request)
+    cartItems = data['cartItems']
     product = Product.objects.get(id=pk)
-    context = {'product': product}
+    context = {'product': product, 'cartItems': cartItems}
     return render(request, 'bottega_retrogaming/product.html', context)
