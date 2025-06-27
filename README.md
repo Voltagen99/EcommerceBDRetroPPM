@@ -12,7 +12,8 @@ Queste sono le credenziali predefinite per l'accesso come amministratore:
 * **Username:** admin
 * **Password:** supermanager
 
-E' fornito anche un profilo di cliente predefinito, senza privilegi di amministratore:
+E' fornito anche un profilo di cliente predefinito, senza privilegi di 
+amministratore:
 
 * **Username:** customer
 * **Password:** shopping99
@@ -38,6 +39,9 @@ HTML, CSS e Javascript.
 Una volta effettuato l'accesso (o come ospite), gli utenti possono sfogliare
 i prodotti disponibili nel negozio e aggiungerli al carrello.
 
+Se lo desidera, l'utente può visualizzare i dettagli di un prodotto e leggerne
+una breve descrizione.
+
 Una volta fatto l'accesso al carrello, sono visibili il numero di prodotti
 selezionati e il prezzo totale del carrello. Gli utenti possono modificare
 la quantità di prodotti nel carrello, rimuovere prodotti (portandone la
@@ -48,6 +52,9 @@ La pagina di checkout richiede agli utenti di fornire un indirizzo di spedizione
 necessari per la creazione automatica dell'account. Una volta completato il checkout,
 tutte le informazioni relative all'ordine vengono salvate nel database e l'utente viene riportato
 alla pagina principale del sito, dove può continuare a sfogliare i prodotti.
+
+E' possibile tornare allo store in qualsiasi momento
+cliccando sul logo "La Bottega del Retrogaming" nella barra di navigazione.
 
 ### Utilizzo del sito: Amministratori
 
