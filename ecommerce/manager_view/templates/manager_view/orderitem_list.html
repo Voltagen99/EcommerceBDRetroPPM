@@ -1,7 +1,7 @@
 {% extends 'bottega_retrogaming/main.html' %}
 {% block content %}
-<div class="container mt-4">
-    <h1 class="mb-4">Gestione Articoli Ordine</h1>
+<div class="container large-bottom-margin mt-4">
+    <h1 id="item-title" class="mb-4">Gestione Articoli Ordine</h1>
     <a href="{% url 'manager_view:orderitem_add' %}" class="btn btn-success mb-3">Aggiungi Articolo</a>
     <table class="table table-striped">
         <thead>

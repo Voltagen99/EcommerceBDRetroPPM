@@ -2,13 +2,22 @@ from django.contrib.auth.mixins import UserPassesTestMixin
 from django.http import HttpRequest
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, TemplateView
+from django.views.generic.base import ContextMixin
+
 from bottega_retrogaming.models import Product, Order, OrderItem, ShippingAddress
 from .forms import ProductForm, OrderForm, OrderItemForm, ShippingAddressForm
+from bottega_retrogaming.utils import cartData
 
-class AdminRequiredMixin(UserPassesTestMixin):
+class AdminRequiredMixin(UserPassesTestMixin, ContextMixin):
     request: HttpRequest
     def test_func(self):
         return self.request.user.is_authenticated and self.request.user.user_type == 'ADMIN'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        data = cartData(self.request)
+        context['cartItems'] = data.get('cartItems', 0)
+        return context
 
 class AdminDashboardView(AdminRequiredMixin, TemplateView):
     template_name = 'manager_view/admin.html'

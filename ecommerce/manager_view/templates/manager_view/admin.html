@@ -1,10 +1,10 @@
 {% extends 'bottega_retrogaming/main.html' %}
 {% block content %}
 <div class="container mt-4">
-    <h1 class="mb-4">Vista Amministratore</h1>
+    <h1 id="admin-title" class="mb-4">Vista Amministratore</h1>
     <div class="row">
         <div class="col-md-3">
-            <div class="card">
+            <div class="card dashboard-card">
                 <div class="card-body">
                     <h5 class="card-title">Prodotti</h5>
                     <p class="card-text">Ci sono {{ product_count }} prodotti.</p>
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card">
+            <div class="card dashboard-card">
                 <div class="card-body">
                     <h5 class="card-title">Ordini</h5>
                     <p class="card-text">Ci sono {{ order_count }} ordini.</p>
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card">
+            <div class="card dashboard-card">
                 <div class="card-body">
                     <h5 class="card-title">Articoli Ordine</h5>
                     <p class="card-text">Ci sono {{ orderitem_count }} articoli.</p>
@@ -31,7 +31,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card">
+            <div class="card dashboard-card">
                 <div class="card-body">
                     <h5 class="card-title">Indirizzi Spedizione</h5>
                     <p class="card-text">Ci sono {{ shippingaddress_count }} indirizzi.</p>

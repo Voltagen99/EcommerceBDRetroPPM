@@ -1,7 +1,7 @@
 {% extends 'bottega_retrogaming/main.html' %}
 {% block content %}
-<div class="container mt-4">
-    <h1 class="mb-4">Gestione Indirizzi di Spedizione</h1>
+<div class="container large-bottom-margin mt-4">
+    <h1 id="sa-title" class="mb-4">Gestione Indirizzi di Spedizione</h1>
     <a href="{% url 'manager_view:shippingaddress_add' %}" class="btn btn-success mb-3">Aggiungi Indirizzo</a>
     <table class="table table-striped">
         <thead>
@@ -18,7 +18,7 @@
         <tbody>
             {% for address in shippingaddresses %}
             <tr>
-                <td>{{ address.customer.name|default:"N/A" }}</td>
+                <td>{{ address.customer.username|default:"N/A" }}</td>
                 <td>{{ address.order.id|default:"N/A" }}</td>
                 <td>{{ address.address }}</td>
                 <td>{{ address.city }}</td>

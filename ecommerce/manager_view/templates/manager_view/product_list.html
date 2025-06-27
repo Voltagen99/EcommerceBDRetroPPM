@@ -1,7 +1,7 @@
 {% extends 'bottega_retrogaming/main.html' %}
 {% block content %}
-<div class="container mt-4">
-    <h1 class="mb-4">Gestione Prodotti</h1>
+<div class="container large-bottom-margin mt-4">
+    <h1 id="pr-title" class="mb-4">Gestione Prodotti</h1>
     <a href="{% url 'manager_view:product_add' %}" class="btn btn-success mb-3">Aggiungi Prodotto</a>
     <table class="table table-striped">
         <thead>

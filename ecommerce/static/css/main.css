@@ -235,3 +235,29 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #0056b3;
     cursor: pointer;
 }
+
+#admin-view-btn {
+    background-color: #7c00ff;
+    color: white;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+#admin-view-btn:hover {
+    background-color: #5600bf;
+    cursor: pointer;
+}
+
+.dashboard-card {
+    border: 2px solid black;
+    border-radius: 0.5rem;
+}
+
+#admin-title, #sa-title, #item-title, #pr-title, #del-title, #or-title, #form-admin-title{
+    font-size: 2.5rem;
+    color: black;
+}
+
+.large-bottom-margin {
+  margin-bottom: 30vh;
+}

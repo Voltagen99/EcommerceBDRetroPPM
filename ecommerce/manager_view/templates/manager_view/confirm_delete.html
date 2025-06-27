@@ -1,7 +1,7 @@
 {% extends 'bottega_retrogaming/main.html' %}
 {% block content %}
 <div class="container mt-4">
-    <h1 class="mb-4">Conferma Eliminazione</h1>
+    <h1 id="del-title" class="mb-4">Conferma Eliminazione</h1>
     <p>Sei sicuro di voler eliminare "{{ object }}"?</p>
     <form method="post">
         {% csrf_token %}

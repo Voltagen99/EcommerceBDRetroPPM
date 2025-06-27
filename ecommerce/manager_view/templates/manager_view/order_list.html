@@ -1,7 +1,7 @@
 {% extends 'bottega_retrogaming/main.html' %}
 {% block content %}
-<div class="container mt-4">
-    <h1 class="mb-4">Gestione Ordini</h1>
+<div class="container large-bottom-margin mt-4">
+    <h1 id="or-title" class="mb-4">Gestione Ordini</h1>
     <a href="{% url 'manager_view:order_add' %}" class="btn btn-success mb-3">Aggiungi Ordine</a>
     <table class="table table-striped">
         <thead>
@@ -18,7 +18,7 @@
             {% for order in orders %}
             <tr>
                 <td>{{ order.id }}</td>
-                <td>{{ order.customer.name|default:"N/A" }}</td>
+                <td>{{ order.customer.username|default:"N/A" }}</td>
                 <td>{{ order.date_ordered|date:"d M Y, H:i" }}</td>
                 <td>{{ order.transaction_id }}</td>
                 <td>{{ order.complete|yesno:"Sì,No" }}</td>
