@@ -81,6 +81,31 @@ h1, h2, h3, h4, h5, h6 {
     cursor: pointer;
 }
 
+.product-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.product-actions .btn {
+    flex-grow: 1;
+    flex-basis: 0;
+    font-size: 0.93rem;
+}
+
+.btn-description {
+    background-color: #009708;
+    color: white;
+    border-radius: 10px;
+    border: solid black;
+    font-weight: bold;
+}
+
+.btn-description:hover {
+    background-color: #02ba0e;
+    border-color: black;
+    cursor: pointer;
+}
+
 .bg-dark {
     background-color: #1ac6ff !important;
 }

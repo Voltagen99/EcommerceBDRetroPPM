@@ -9,11 +9,19 @@
                 <div class="col-lg-5 col-md-12 mb-3 mb-lg-0">
                     <label for="sort-select" style="font-weight: bold;">ORDINA PER:</label>
                     <select name="sort" class="form-control" id="sort-select">
-                        <option value="default" {% if not request.GET.sort or request.GET.sort == 'default' %}selected{% endif %}>ID (Default)</option>
+                        <option value="default"
+                                {% if not request.GET.sort or request.GET.sort == 'default' %}selected{% endif %}>ID
+                            (Default)
+                        </option>
                         <option value="name_asc" {% if request.GET.sort == 'name_asc' %}selected{% endif %}>A-Z</option>
-                        <option value="name_desc" {% if request.GET.sort == 'name_desc' %}selected{% endif %}>Z-A</option>
-                        <option value="price_asc" {% if request.GET.sort == 'price_asc' %}selected{% endif %}>Prezzo: dal più economico</option>
-                        <option value="price_desc" {% if request.GET.sort == 'price_desc' %}selected{% endif %}>Prezzo: dal più costoso</option>
+                        <option value="name_desc" {% if request.GET.sort == 'name_desc' %}selected{% endif %}>Z-A
+                        </option>
+                        <option value="price_asc" {% if request.GET.sort == 'price_asc' %}selected{% endif %}>Prezzo:
+                            dal più economico
+                        </option>
+                        <option value="price_desc" {% if request.GET.sort == 'price_desc' %}selected{% endif %}>Prezzo:
+                            dal più costoso
+                        </option>
                     </select>
                 </div>
 
@@ -21,7 +29,8 @@
                     <label for="filter-select" style="font-weight: bold;">FILTRA PER:</label>
                     <select name="digital" class="form-control" id="filter-select">
                         <option value="" {% if not request.GET.digital %}selected{% endif %}>Tutti i prodotti</option>
-                        <option value="yes" {% if request.GET.digital == 'yes' %}selected{% endif %}>Digital: Yes</option>
+                        <option value="yes" {% if request.GET.digital == 'yes' %}selected{% endif %}>Digital: Yes
+                        </option>
                         <option value="no" {% if request.GET.digital == 'no' %}selected{% endif %}>Digital: No</option>
                     </select>
                 </div>
@@ -42,11 +51,14 @@
                         <h4 class="mb-0"><strong>${{ product.price|floatformat:2 }}</strong></h4>
                     </div>
                     <hr>
-                    <button
-                            data-product="{{ product.id }}"
-                            data-action="add"
-                            class="btn btn-outline-secondary add-btn update-cart w-100">Aggiungi al Carrello
-                    </button>
+                    <div class="product-actions">
+                        <button
+                                data-product="{{ product.id }}"
+                                data-action="add"
+                                class="btn btn-outline-secondary add-btn update-cart">Aggiungi al Carrello
+                        </button>
+                        <a href="{% url 'product_detail' product.id %}" class="btn btn-success btn-description">Visualizza</a>
+                    </div>
                 </div>
             </div>
         {% endfor %}

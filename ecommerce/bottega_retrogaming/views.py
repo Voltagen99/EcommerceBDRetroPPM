@@ -121,3 +121,8 @@ def processOrder(request):
         print('No shipping address provided')
 
     return JsonResponse('Payment submitted', safe=False)
+
+def product_detail(request, pk):
+    product = Product.objects.get(id=pk)
+    context = {'product': product}
+    return render(request, 'bottega_retrogaming/product.html', context)
