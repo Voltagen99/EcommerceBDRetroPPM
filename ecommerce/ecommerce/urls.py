@@ -6,6 +6,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('manager/', include('manager_view.urls')),
     path('', include('bottega_retrogaming.urls')),
     path('user/', include('user_management.urls')),
 ]

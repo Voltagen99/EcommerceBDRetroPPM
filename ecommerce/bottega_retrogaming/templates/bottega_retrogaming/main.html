@@ -70,7 +70,10 @@
             <div class="form-inline my-2 my-lg-0 {% if request.path == login_url %}d-none{% endif %}">
                 {% if user.is_authenticated %}
                     <span class="navbar-text mr-3">Ciao, {{ user.username }}</span>
-                    <form method="post" action="{% url 'logout' %}" style="display: inline;">
+                    {% if user.user_type == 'ADMIN' %}
+                        <a href="{% url 'manager_view:admin_dashboard' %}"
+                           class="btn btn-info" style="margin-right: 10px;">Vista Amministratore</a>
+                    {% endif %} <form method="post" action="{% url 'logout' %}" style="display: inline;">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-logout">Logout</button>
                     </form>

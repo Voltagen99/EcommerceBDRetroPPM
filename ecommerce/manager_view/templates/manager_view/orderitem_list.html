@@ -1,0 +1,37 @@
+{% extends 'bottega_retrogaming/main.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Gestione Articoli Ordine</h1>
+    <a href="{% url 'manager_view:orderitem_add' %}" class="btn btn-success mb-3">Aggiungi Articolo</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Prodotto</th>
+                <th>Ordine ID</th>
+                <th>Quantità</th>
+                <th>Data Aggiunta</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in orderitems %}
+            <tr>
+                <td>{{ item.product.name|default:"N/A" }}</td>
+                <td>{{ item.order.id|default:"N/A" }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.date_added|date:"d M Y, H:i" }}</td>
+                <td>
+                    <a href="{% url 'manager_view:orderitem_edit' item.pk %}" class="btn btn-warning btn-sm">Modifica</a>
+                    <a href="{% url 'manager_view:orderitem_delete' item.pk %}" class="btn btn-danger btn-sm">Elimina</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5">Nessun articolo trovato.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'manager_view:admin_dashboard' %}" class="btn btn-secondary">Torna alla Dashboard</a>
+</div>
+{% endblock content %}

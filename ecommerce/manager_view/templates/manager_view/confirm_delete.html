@@ -1,0 +1,12 @@
+{% extends 'bottega_retrogaming/main.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Conferma Eliminazione</h1>
+    <p>Sei sicuro di voler eliminare "{{ object }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sì, elimina</button>
+        <a href="{{ request.META.HTTP_REFERER|escape }}" class="btn btn-secondary">Annulla</a>
+    </form>
+</div>
+{% endblock content %}

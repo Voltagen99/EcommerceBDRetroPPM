@@ -1,0 +1,44 @@
+{% extends 'bottega_retrogaming/main.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Vista Amministratore</h1>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Prodotti</h5>
+                    <p class="card-text">Ci sono {{ product_count }} prodotti.</p>
+                    <a href="{% url 'manager_view:product_list' %}" class="btn btn-primary">Gestisci Prodotti</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Ordini</h5>
+                    <p class="card-text">Ci sono {{ order_count }} ordini.</p>
+                    <a href="{% url 'manager_view:order_list' %}" class="btn btn-primary">Gestisci Ordini</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Articoli Ordine</h5>
+                    <p class="card-text">Ci sono {{ orderitem_count }} articoli.</p>
+                    <a href="{% url 'manager_view:orderitem_list' %}" class="btn btn-primary">Gestisci Articoli</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Indirizzi Spedizione</h5>
+                    <p class="card-text">Ci sono {{ shippingaddress_count }} indirizzi.</p>
+                    <a href="{% url 'manager_view:shippingaddress_list' %}" class="btn btn-primary">Gestisci Indirizzi</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
