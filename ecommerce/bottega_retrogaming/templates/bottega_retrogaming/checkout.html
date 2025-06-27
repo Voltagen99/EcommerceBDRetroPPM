@@ -8,7 +8,7 @@
                     <div id="user-info">
                         <div class="form-field">
                             <label>
-                                <input required class="form-control" type="text" name="name" placeholder="Name..">
+                                <input required class="form-control" type="text" name="name" placeholder="Nome..">
                             </label>
                         </div>
                         <div class="form-field">
@@ -24,7 +24,7 @@
                         </div>
                         <div class="form-field">
                             <label>
-                                <input required class="form-control" type="password" name="password-confirm" placeholder="Confirm Password..">
+                                <input required class="form-control" type="password" name="password-confirm" placeholder="Conferma Password..">
                             </label>
                         </div>
                         {% endif %}
@@ -32,47 +32,47 @@
 
                     <div id="shipping-info">
                         <hr>
-                        <p>Shipping Information:</p>
+                        <p>Informazioni per la Spedizione:</p>
                         <hr>
                         <div class="form-field">
                             <label>
-                                <input class="form-control" type="text" name="address" placeholder="Address..">
+                                <input class="form-control" type="text" name="address" placeholder="Indirizzo..">
                             </label>
                         </div>
                         <div class="form-field">
                             <label>
-                                <input class="form-control" type="text" name="city" placeholder="City..">
+                                <input class="form-control" type="text" name="city" placeholder="Città..">
                             </label>
                         </div>
                         <div class="form-field">
                             <label>
-                                <input class="form-control" type="text" name="state" placeholder="State..">
+                                <input class="form-control" type="text" name="state" placeholder="Stato..">
                             </label>
                         </div>
                         <div class="form-field">
                             <label>
-                                <input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
+                                <input class="form-control" type="text" name="zipcode" placeholder="CAP..">
                             </label>
                         </div>
                     </div>
 
                     <hr>
-                    <input id="form-button" class="btn btn-proceed" type="submit" value="Continue">
+                    <input id="form-button" class="btn btn-proceed" type="submit" value="Continua">
                 </form>
             </div>
 
             <br>
             <div class="box-element hidden" id="payment-info">
-                <button id="make-payment" class="btn btn-proceed">Make payment</button>
+                <button id="make-payment" class="btn btn-proceed">Acquista</button>
             </div>
 
         </div>
 
         <div class="col-lg-6">
             <div class="box-element">
-                <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Back to Cart</a>
+                <a class="btn btn-outline-dark" href="{% url 'cart' %}">&#x2190; Torna al Carrello</a>
                 <hr>
-                <h3>Order Summary</h3>
+                <h3>Riepilogo Ordine</h3>
                 <hr>
                 {% for item in items %}
                     <div class="cart-row">
@@ -82,8 +82,8 @@
                         <div style="flex:1"><p>x{{ item.quantity }}</p></div>
                     </div>
                 {% endfor %}
-                <h5>Items: {{ order.get_cart_items }}</h5>
-                <h5>Total: ${{ order.get_cart_total|floatformat:2 }}</h5>
+                <h5>Oggetti: {{ order.get_cart_items }}</h5>
+                <h5>Totale: ${{ order.get_cart_total|floatformat:2 }}</h5>
             </div>
         </div>
     </div>
