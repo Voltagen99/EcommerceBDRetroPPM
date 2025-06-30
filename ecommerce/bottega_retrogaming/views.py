@@ -102,6 +102,9 @@ def processOrder(request):
         login(request, customer)
         order = order_or_error
 
+    if order.get_cart_items == 0:
+        return JsonResponse({'error': 'Il carrello non può essere vuoto'}, status=400)
+
     total = float(data['form']['total'])
     order.transaction_id = transaction_id
     if total == order.get_cart_total:

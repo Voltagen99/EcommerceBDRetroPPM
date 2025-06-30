@@ -17,16 +17,18 @@
                             </label>
                         </div>
                         {% if not user.is_authenticated %}
-                        <div class="form-field">
-                            <label>
-                                <input required class="form-control" type="password" name="password" placeholder="Password..">
-                            </label>
-                        </div>
-                        <div class="form-field">
-                            <label>
-                                <input required class="form-control" type="password" name="password-confirm" placeholder="Conferma Password..">
-                            </label>
-                        </div>
+                            <div class="form-field">
+                                <label>
+                                    <input required class="form-control" type="password" name="password"
+                                           placeholder="Password..">
+                                </label>
+                            </div>
+                            <div class="form-field">
+                                <label>
+                                    <input required class="form-control" type="password" name="password-confirm"
+                                           placeholder="Conferma Password..">
+                                </label>
+                            </div>
                         {% endif %}
                     </div>
 
@@ -76,7 +78,8 @@
                 <hr>
                 {% for item in items %}
                     <div class="cart-row">
-                        <div style="flex:2"><img class="row-image" src="{{ item.product.imageUrl }}" alt="checkout_prod_image"></div>
+                        <div style="flex:2"><img class="row-image" src="{{ item.product.imageUrl }}"
+                                                 alt="checkout_prod_image"></div>
                         <div style="flex:2"><p>{{ item.product.name }}</p></div>
                         <div style="flex:1"><p>${{ item.product.price|floatformat:2 }}</p></div>
                         <div style="flex:1"><p>x{{ item.quantity }}</p></div>
@@ -91,6 +94,7 @@
     <script type="text/javascript">
         const shipping = '{{order.shipping}}'
         const total = '{{order.get_cart_total}}'
+        let cartItems = {{order.get_cart_items}}
         const form = document.getElementById('form');
 
         if (shipping === 'False') {
@@ -121,6 +125,10 @@
 
         function submitFormData() {
             console.log('Payment button clicked')
+            if (cartItems === 0) {
+                alert('Impossibile completare l\'ordine, il carrello è vuoto!');
+                return;
+            }
 
             const userFormData = {
                 'name': null,
