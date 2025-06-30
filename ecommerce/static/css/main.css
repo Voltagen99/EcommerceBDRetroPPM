@@ -256,6 +256,10 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 5px;
 }
 
+.btn.btn-proceed:active {
+    color: white;
+}
+
 .btn.btn-proceed:hover {
     background-color: #0056b3;
     cursor: pointer;
