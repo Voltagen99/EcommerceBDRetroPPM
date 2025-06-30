@@ -1,8 +1,6 @@
 {% extends 'bottega_retrogaming/main.html' %}
 {% load static %}
-
 {% block content %}
-
     <div class="p-3 filter-container mb-4">
         <form method="GET" action="{% url 'store' %}">
             <div class="row align-items-end">
@@ -29,9 +27,9 @@
                     <label for="filter-select" style="font-weight: bold;">FILTRA PER:</label>
                     <select name="digital" class="form-control" id="filter-select">
                         <option value="" {% if not request.GET.digital %}selected{% endif %}>Tutti i prodotti</option>
-                        <option value="yes" {% if request.GET.digital == 'yes' %}selected{% endif %}>Digital: Yes
+                        <option value="yes" {% if request.GET.digital == 'yes' %}selected{% endif %}>Digitale: Sì
                         </option>
-                        <option value="no" {% if request.GET.digital == 'no' %}selected{% endif %}>Digital: No</option>
+                        <option value="no" {% if request.GET.digital == 'no' %}selected{% endif %}>Digitale: No</option>
                     </select>
                 </div>
 
@@ -48,7 +46,7 @@
                 <div class="box-element product">
                     <div class="product-header">
                         <h6><strong>{{ product.name }}</strong></h6>
-                        <h4 class="mb-0"><strong>${{ product.price|floatformat:2 }}</strong></h4>
+                        <h4 class="mb-0"><strong>€{{ product.price|floatformat:2 }}</strong></h4>
                     </div>
                     <hr>
                     <div class="product-actions">
