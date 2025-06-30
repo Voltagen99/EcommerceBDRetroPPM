@@ -120,6 +120,9 @@ def processOrder(request):
     else:
         print('No shipping address provided')
 
+    # Aggiorna la data dell'ordine se l'ordine è completo, per farla coincidere con il momento del pagamento
+    if order.complete:
+        Order.objects.filter(pk=order.pk).update(date_ordered=datetime.datetime.now())
     return JsonResponse('Payment submitted', safe=False)
 
 def product_detail(request, pk):
