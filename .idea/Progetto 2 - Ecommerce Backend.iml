@@ -17,7 +17,7 @@
       <sourceFolder url="file://$MODULE_DIR$/ecommerce" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.13 (Progetto 2 - Ecommerce Backend)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.13 virtualenv at C:\Users\franc\OneDrive\Documenti\Unifi\PPM\Progetto 2 - Ecommerce Backend\.venv" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="bootstrap" level="application" />
     <orderEntry type="library" name="@popperjs/core" level="application" />
